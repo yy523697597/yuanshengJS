@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>单元行上鼠标悬停提示</title>
+  <link rel="stylesheet" type="text/css" href="../../styles/reset.css" media="all"/>
+  <style type="text/css">
+    h3{
+      text-align: center;
+    }
+    .demo {
+      width: 350px;
+      margin: 50px auto;
+      text-align: left;
+      padding: 0;
+    }
+
+    .list {
+      color: #2a6496;
+    }
+
+    .list li {
+      position: relative;
+      width: 320px;
+      list-style: decimal inside;
+      line-height: 35px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .list a {
+      font-size: 18px;
+    }
+
+    .tip {
+      position: absolute;
+      left: 0;
+      display: none;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.6);
+      line-height: 25px;
+      font-size: 12px;
+      padding: 2px 5px;
+      border-radius: 5px;
+      z-index: 1
+    }
+
+    .ellipsis {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  </style>
+</head>
+<body>
+<div id="div" class="demo">
+  <h3>单元行上鼠标悬停提示</h3>
+  <ol class="list">
+    <li><i></i><a href="http://www.cnbeta.com/articles/557939.htm" data-title="微软新专利：可投影的 Surface 桌面">微软新专利：可投影的 Surface 桌面</a></li>
+    <li><i></i><a href="http://www.cnbeta.com/articles/557935.htm" data-title="Java 开源十年之后仍然引起争议">Java 开源十年之后仍然引起争议</a></li>
+    <li><i></i><a href="http://www.cnbeta.com/articles/557929.htm" data-title="依旧华为风格：华为 Mate 9 上手图赏 黑边极速缩窄">依旧华为风格：华为 Mate 9 上手图赏 黑边极速缩窄</a></li>
+    <li><i></i><a href="http://voice.hupu.com/cba/2089092.html" data-title="易建联 CBA 生涯总得分突破八千分">易建联 CBA 生涯总得分突破八千分</a></li>
+    <li><i></i><a href="http://voice.hupu.com/nba/2089031.html" data-title="杜兰特连续 11 场送盖帽刷新个人纪录">杜兰特连续 11 场送盖帽刷新个人纪录</a></li>
+    <li><i></i><a href="http://voice.hupu.com/nba/2089006.html" data-title="41+12+16！威少个人本赛季第三次三双">41+12+16！威少个人本赛季第三次三双</a></li>
+  </ol>
+</div>
+<script>
+  (function () {
+    var div = document.getElementById('div');
+    var links = div.getElementsByTagName('a');
+    var tip = createTip();
+    for (var i = 0; i < links.length; i++) {
+      links[i].onmousemove = function (e) {
+        e = e || event;
+        var title = this.getAttribute('data-title');
+        tip.innerHTML = title;
+        tip.style.display = 'block';
+        tip.style.left = e.clientX + 10 + 'px';
+        tip.style.top = e.clientY + 15 + 'px';
+      }
+      links[i].onmouseout = function (e) {
+        tip.style.display = 'none'
+      }
+    }
+    function createTip() {
+      var div = document.createElement('div');
+      div.className = 'tip';
+      return document.body.appendChild(div);
+    }
+  }());
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>去除字符串左右的空格</title>
+  <link rel="stylesheet" type="text/css" href="../styles/bootstrap.min.css" media="all">
+  <link rel="stylesheet" type="text/css" href="../styles/bootstrap-theme.min.css" media="all">
+  <link rel="stylesheet" type="text/css" href="../styles/reset.css" media="all">
+</head>
+<body>
+<div class="demo1 tc">
+  <input class="input" type="text" value="[     需要  过滤   的   空格      ]" name="" id="input">
+  <button class="btn btn-primary" id="btn">点击过滤空格</button>
+</div>
+<script>
+  (function () {
+    var input = document.getElementById('input');
+    var btn = document.getElementById('btn');
+    btn.onclick = function () {
+      input.value = input.value.replace(/(\s|\u00A0)+|(\s|\u00A0)+/g, '');
+    }
+  }());
+</script>
+
+</body>
+</html>

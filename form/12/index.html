@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <title>全选反选少选复选框</title>
+  <link rel="stylesheet" type="text/css" href="../styles/bootstrap.min.css" media="all">
+  <link rel="stylesheet" type="text/css" href="../styles/bootstrap-theme.min.css" media="all">
+  <link rel="stylesheet" type="text/css" href="../styles/reset.css" media="all">
+  <style type="text/css">
+    .demo1 {
+      text-align: center;
+    }
+
+    .demo1 input {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="demo1">
+  <h5><input type="checkbox" id="all" class="checkbox-inline"><label for="all">全选选项</label></h5>
+  <p><input type="checkbox" name="item" id="check1" class="checkbox-inline"><label for="check1">选项（一）</label></p>
+  <p><input type="checkbox" name="item" id="check2" class="checkbox-inline"><label for="check2">选项（二）</label></p>
+  <p><input type="checkbox" name="item" id="check3" class="checkbox-inline"><label for="check3">选项（三）</label></p>
+  <p><input type="checkbox" name="item" id="check4" class="checkbox-inline"><label for="check4">选项（四）</label></p>
+  <p><input type="checkbox" name="item" id="check5" class="checkbox-inline"><label for="check5">选项（五）</label></p>
+  <p><input type="checkbox" name="item" id="check6" class="checkbox-inline"><label for="check6">选项（六）</label></p>
+  <p><input type="checkbox" name="item" id="check7" class="checkbox-inline"><label for="check7">选项（七）</label></p>
+  <p><input type="checkbox" name="item" id="check8" class="checkbox-inline"><label for="check8">选项（八）</label></p>
+  <p><input type="checkbox" name="item" id="check9" class="checkbox-inline"><label for="check9">选项（九）</label></p>
+  <p><input type="checkbox" name="item" id="check10" class="checkbox-inline"><label for="check10">选项（十）</label></p>
+</div>
+<script>
+  (function () {
+    var all = document.getElementById('all');
+    var check = document.getElementsByTagName('input');
+    var len = check.length - 1;
+    all.onclick = function () {
+      choose(this.checked);
+    }
+    function each(arr, callback) {
+      var len = arr.length;
+      for (var i = 1; i < len; i++) {
+        if (callback.call(arr[i], i, arr[i]) === false) {
+          break;
+        }
+      }
+      return arr;
+    }
+
+    function choose(t) {
+      each(check, function (i) {
+        check[i].checked = t;
+      });
+    }
+
+    each(check, function (i) {
+      check[i].onclick = function () {
+        if (!this.checked) {
+          all.checked = false;
+        }
+        if (checkLen() == len) {
+          all.checked = true;
+        } else {
+          all.checked = false;
+        }
+      }
+    });
+    function checkLen() {
+      var n = 0;
+      each(check, function (i) {
+        if (this.checked) {
+          n++;
+        }
+      });
+      return n;
+    }
+  }());
+</script>
+</body>
+</html>
